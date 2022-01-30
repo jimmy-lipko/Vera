@@ -1,0 +1,13 @@
+name: Vera_Internal_Reporting
+title: Vera_Internal_Reporting
+username:
+account: veracoffee
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5457309
+bundleId: 5500126
+url: https://veracoffee.shinyapps.io/Vera_Internal_Reporting/
+when: 1642991331.85372
+lastSyncTime: 1642991331.85373
+asMultiple: FALSE
+asStatic: FALSE
