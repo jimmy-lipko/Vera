@@ -8,19 +8,22 @@ CREATE TABLE web_request (
   service_hours VARCHAR (255)
   manufacturer VARCHAR (255),
   model VARCHAR (255),
-  submitted_at timestamp DEFAULT now()
-
+  message text,
+  submitted_at timestamp DEFAULT now(),
+  CONSTRAINT web_request_fk
+      FOREIGN KEY(customer_id)
+	  REFERENCES customers(id)
 )
 
 DROP TABLE if exists customers;
 CREATE TABLE  customers (
-   customer_id serial PRIMARY KEY,
+   id serial PRIMARY KEY,
    customer_name VARCHAR (255) NOT NULL,
    address VARCHAR (255) NOT NULL,
    city VARCHAR (255),
    state_code VARCHAR (2) NOT NULL,
    country_code VARCHAR (2) NOT NULL,
-   zip_code INT NOT NULL,
+   zip_code VARCHAR NOT NULL,
    phone_number VARCHAR (20),
    location_type VARCHAR (20),
    business_type VARCHAR(20),
@@ -29,14 +32,14 @@ CREATE TABLE  customers (
 
 DROP TABLE if exists technicians ;
 CREATE TABLE technicians (
-   technician_id serial PRIMARY KEY,
+   id serial PRIMARY KEY,
    first_name VARCHAR (255),
    last_name VARCHAR (255),
    address VARCHAR (255),
    city VARCHAR (255),
    state_code VARCHAR (2),
    country_code VARCHAR (2),
-   zip_code INT,
+   zip_code VARCHAR,
    phone_number VARCHAR (20),
    vera_affiliation boolean,
    technician_since timestamp NOT NULL default NOW()
@@ -44,7 +47,7 @@ CREATE TABLE technicians (
 
 DROP TABLE if exists products;
 CREATE TABLE products (
-	product_id serial PRIMARY KEY,
+	id serial PRIMARY KEY,
 	name varchar (255) NOT NULL,
 	sku varchar(255),
   serial_number varchar (255),
