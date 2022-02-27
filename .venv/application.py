@@ -12,7 +12,7 @@ def __init__(self, arg):
 conn = psycopg2.connect(host='prod.cazcqhfxsztq.us-east-1.rds.amazonaws.com',
                         port='5432',
                         user='postgres',
-                        password='password',
+                        password='Janj2910!',
                         database='postgres')
 
 
@@ -23,7 +23,10 @@ def veraWebsite():
     content_type = request.headers.get('Content-Type')
     if (request.method == 'POST') & (content_type == 'application/json'):
 
-        data = request.get_json()
+        json = request.get_json()
+        data = json['data']
+
+
 
         customer_query = """INSERT INTO customers (
           customer_name,
@@ -33,13 +36,14 @@ def veraWebsite():
           country_code,
           zip_code,
           phone_number,
+          email,
           location_type,
           business_type
           )
         VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING id;"""
 
         cursor1 = conn.cursor()
-        cursor1.execute(customer_query,(data["customer_name"], data["address"],data["city"], data["state_code"], data["country_code"],data["zip_code"], data["phone_number"], data["location_type"], data["business_type"]))
+        cursor1.execute(customer_query,(data["customer_name"], data["address"],data["city"], data["state_code"], data["country_code"],data["zip_code"], data["phone_number"], data["email"], data["location_type"], data["business_type"]))
         conn.commit()
         customer_id = cursor1.fetchone()[0]
         cursor1.close()
